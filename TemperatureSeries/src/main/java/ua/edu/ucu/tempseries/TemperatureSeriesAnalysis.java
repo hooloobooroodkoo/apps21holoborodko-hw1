@@ -181,35 +181,4 @@ public class TemperatureSeriesAnalysis {
         }
         return sum;
     }
-
-    public static void main(String[] args) {
-        double[] arr = new double[]{-1.0, 0.0, 3.0};
-        TemperatureSeriesAnalysis n = new TemperatureSeriesAnalysis(arr);
-        System.out.printf("Average: %f%n", n.average());
-        System.out.printf("Min: %f%n", n.min());
-        System.out.printf("Max: %f%n", n.max());
-        System.out.printf("Closest to zero: %f%n", n.findTempClosestToZero());
-        System.out.printf("Closest to -5.0: %f%n", n.findTempClosestToValue(-5.0));
-        System.out.printf("Deviation: %f%n", n.deviation());
-        System.out.print("Temperatures less than 0.5: ");
-        double[] less = n.findTempsLessThen(0.5);
-        for (double value: less) {
-            System.out.print(value + " ");
-        }
-        System.out.println();
-        System.out.print("Temperatures greater than 2.0: ");
-        double[] larger = n.findTempsGreaterThen(2.0);
-        for (double value: larger) {
-            System.out.print(value + " ");
-        }
-        System.out.println();
-        System.out.print("Sum of temperatures with newly added: ");
-        System.out.println(n.addTemps(-10.0, 5.0, -280.0));
-        for (double value: n.tempSeries) {
-            System.out.print(value + " ");
-        }
-        System.out.println();
-
-        System.out.println(n.summaryStatistics());
-    }
 }
