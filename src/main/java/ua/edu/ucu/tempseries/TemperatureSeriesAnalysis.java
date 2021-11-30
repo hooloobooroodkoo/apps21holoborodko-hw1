@@ -14,11 +14,13 @@ public class TemperatureSeriesAnalysis {
     }
 
     public TemperatureSeriesAnalysis(double[] temperatureSeries) {
-        if (temperatureSeries.length > 0 && minValue(temperatureSeries) < this.minPossible) {
+        if (temperatureSeries.length > 0 && minValue(temperatureSeries)
+                < this.minPossible) {
             throw new InputMismatchException();
         }
         else {
-            this.tempSeries = Arrays.copyOf(temperatureSeries, temperatureSeries.length);
+            this.tempSeries = Arrays.copyOf
+                    (temperatureSeries, temperatureSeries.length);
             this.length = temperatureSeries.length;
         }
     }
@@ -100,9 +102,9 @@ public class TemperatureSeriesAnalysis {
             double closest = this.tempSeries[0];
             double minDistance = Math.abs(closest);
             for (int i = 1; i < this.length; i++) {
-                if ((Math.abs(tempSeries[i]) < minDistance) ||
-                        (Math.abs(tempSeries[i]) == minDistance &&
-                                tempSeries[i] > closest)) {
+                if ((Math.abs(tempSeries[i]) < minDistance)
+                        || (Math.abs(tempSeries[i]) == minDistance
+                        && tempSeries[i] > closest)) {
                     minDistance = Math.abs(tempSeries[i]);
                     closest = tempSeries[i];
                 }
@@ -171,20 +173,20 @@ public class TemperatureSeriesAnalysis {
             throw new InputMismatchException();
         }
         int len = 2*temps.length;
-        int length_of_temps = temps.length;
+        int lengthOTemps = temps.length;
         if (!this.isEmpty()) {
             len = 2*this.length;
-            length_of_temps = this.length + length_of_temps;
+            lengthOTemps = this.length + lengthOTemps;
         }
         int sum = 0;
         double[] arr  = new double[len];
-        for (int i=0; i<this.length; i++) {
+        for (int i = 0; i < this.length; i++) {
             arr[i] = this.tempSeries[i];
             sum += this.tempSeries[i];
         }
         int j = this.length;
         this.tempSeries = Arrays.copyOf(arr, len);
-        this.length = length_of_temps;
+        this.length = lengthOTemps;
         for (double value: temps) {
             this.tempSeries[j] = value;
             sum += value;
