@@ -1,7 +1,6 @@
 package ua.edu.ucu.tempseries;
 
 
-import static java.lang.Math.*;
 import java.util.Arrays;
 import java.util.InputMismatchException;
 public class TemperatureSeriesAnalysis {
@@ -59,7 +58,7 @@ public class TemperatureSeriesAnalysis {
             deviation += (this.tempSeries[i] - average)
                     * (this.tempSeries[i] - average);
         }
-        return sqrt(deviation/this.length);
+        return Math.sqrt(deviation/this.length);
     }
 
     public double minValue(double[] arr) {
@@ -99,12 +98,12 @@ public class TemperatureSeriesAnalysis {
     public double findTempClosestToZero() {
         if (this.length > 0) {
             double closest = this.tempSeries[0];
-            double minDistance = abs(closest);
+            double minDistance = Math.abs(closest);
             for (int i = 1; i < this.length; i++) {
-                if ((abs(tempSeries[i]) < minDistance) ||
-                        (abs(tempSeries[i]) == minDistance &&
+                if ((Math.abs(tempSeries[i]) < minDistance) ||
+                        (Math.abs(tempSeries[i]) == minDistance &&
                                 tempSeries[i] > closest)) {
-                    minDistance = abs(tempSeries[i]);
+                    minDistance = Math.abs(tempSeries[i]);
                     closest = tempSeries[i];
                 }
             }
@@ -118,12 +117,12 @@ public class TemperatureSeriesAnalysis {
     public double findTempClosestToValue(double tempValue) {
         if (!this.isEmpty()) {
             double closest = this.tempSeries[0];
-            double difference = abs(tempValue - closest);
+            double difference = Math.abs(tempValue - closest);
             for (int i = 1; i < this.length; i++) {
-                if ((abs(tempValue - tempSeries[i]) < difference)
-                        || (abs(tempValue - tempSeries[i]) == difference &&
+                if ((Math.abs(tempValue - tempSeries[i]) < difference)
+                        || (Math.abs(tempValue - tempSeries[i]) == difference &&
                         tempSeries[i] > closest)) {
-                    difference = abs(tempValue - tempSeries[i]);
+                    difference = Math.abs(tempValue - tempSeries[i]);
                     closest = tempSeries[i];
                 }
             }
