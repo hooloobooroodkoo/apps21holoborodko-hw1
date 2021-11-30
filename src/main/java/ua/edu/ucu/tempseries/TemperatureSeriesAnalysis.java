@@ -32,10 +32,6 @@ public class TemperatureSeriesAnalysis {
         return sum;
     }
 
-    public void setTempSeries(double[] updated) {
-        this.tempSeries = updated;
-    }
-
     public boolean isEmpty() {
         return this.length <= 0;
     }
@@ -103,7 +99,7 @@ public class TemperatureSeriesAnalysis {
             double minDistance = Math.abs(closest);
             for (int i = 1; i < this.length; i++) {
                 if ((Math.abs(tempSeries[i]) < minDistance)
-                        || (Math.abs(tempSeries[i]) == minDistance
+                        || (Math.abs(tempSeries[i]-minDistance) < 0.0000001
                         && tempSeries[i] > closest)) {
                     minDistance = Math.abs(tempSeries[i]);
                     closest = tempSeries[i];
