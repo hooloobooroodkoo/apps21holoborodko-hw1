@@ -21,7 +21,9 @@ public class TempSummaryStatistics {
     }
 
     public String toString() {
-        return "Average: " + this.avgTemp + "\n" + "Deviation: " + this.devTemp +
-                "\n" + "Min: " + this.minTemp + "\n" + "Max: " + this.maxTemp;
+        return "Average: " + this.avgTemp
+                + "\nDeviation: " + this.devTemp
+                + "\nMin: " + this.minTemp
+                + "\nMax: " + this.maxTemp;
     }
 }

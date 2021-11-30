@@ -1,26 +1,21 @@
 package ua.edu.ucu.tempseries;
 
 
-import java.lang.Math;
+import static java.lang.Math.*;
 import java.util.Arrays;
 import java.util.InputMismatchException;
 public class TemperatureSeriesAnalysis {
-    protected double[] tempSeries;
-    private final double min_possible = -273.0;
+    private double[] tempSeries;
+    private final double minPossible = -273.0;
     private int length;
-
 
     public TemperatureSeriesAnalysis() {
         this.tempSeries = new double[0];
         this.length = 0;
     }
 
-    public boolean isEmpty() {
-        return this.length <= 0;
-    }
-
     public TemperatureSeriesAnalysis(double[] temperatureSeries) {
-        if (temperatureSeries.length > 0 && min_value(temperatureSeries) < this.min_possible) {
+        if (temperatureSeries.length > 0 && minValue(temperatureSeries) < this.minPossible) {
             throw new InputMismatchException();
         }
         else {
@@ -36,6 +31,18 @@ public class TemperatureSeriesAnalysis {
         return sum;
     }
 
+    public void setTempSeries(double[] updated) {
+        this.tempSeries = updated;
+    }
+
+    public boolean isEmpty() {
+        return this.length <= 0;
+    }
+
+    public double[] getTempSeries() {
+        return this.tempSeries;
+    }
+
     public double average() {
         if (!this.isEmpty()) {
             return sum()/this.length;
@@ -49,12 +56,13 @@ public class TemperatureSeriesAnalysis {
         double average = average();
         double deviation = 0;
         for (int i = 0; i < this.length; i++) {
-            deviation += (this.tempSeries[i] - average) * (this.tempSeries[i] - average);
+            deviation += (this.tempSeries[i] - average)
+                    * (this.tempSeries[i] - average);
         }
-        return Math.sqrt(deviation/this.length);
+        return sqrt(deviation/this.length);
     }
 
-    public double min_value(double[] arr) {
+    public double minValue(double[] arr) {
         double min = arr[0];
         for (int i = 1; i < arr.length; i++) {
             if (arr[i] < min) {
@@ -66,7 +74,7 @@ public class TemperatureSeriesAnalysis {
 
     public double min() {
         if (this.length > 0) {
-            return min_value(this.tempSeries);
+            return minValue(this.tempSeries);
         }
         else {
             throw new IllegalArgumentException("There is no data");
@@ -91,10 +99,12 @@ public class TemperatureSeriesAnalysis {
     public double findTempClosestToZero() {
         if (this.length > 0) {
             double closest = this.tempSeries[0];
-            double min_distance = Math.abs(closest);
+            double minDistance = abs(closest);
             for (int i = 1; i < this.length; i++) {
-                if ((Math.abs(tempSeries[i]) < min_distance) || (Math.abs(tempSeries[i]) == min_distance && tempSeries[i] > closest)) {
-                    min_distance = Math.abs(tempSeries[i]);
+                if ((abs(tempSeries[i]) < minDistance) ||
+                        (abs(tempSeries[i]) == minDistance &&
+                                tempSeries[i] > closest)) {
+                    minDistance = abs(tempSeries[i]);
                     closest = tempSeries[i];
                 }
             }
@@ -108,10 +118,12 @@ public class TemperatureSeriesAnalysis {
     public double findTempClosestToValue(double tempValue) {
         if (!this.isEmpty()) {
             double closest = this.tempSeries[0];
-            double difference = Math.abs(tempValue - closest);
+            double difference = abs(tempValue - closest);
             for (int i = 1; i < this.length; i++) {
-                if ((Math.abs(tempValue - tempSeries[i]) < difference) || (Math.abs(tempValue - tempSeries[i]) == difference && tempSeries[i] > closest)) {
-                    difference = Math.abs(tempValue - tempSeries[i]);
+                if ((abs(tempValue - tempSeries[i]) < difference)
+                        || (abs(tempValue - tempSeries[i]) == difference &&
+                        tempSeries[i] > closest)) {
+                    difference = abs(tempValue - tempSeries[i]);
                     closest = tempSeries[i];
                 }
             }
@@ -125,7 +137,7 @@ public class TemperatureSeriesAnalysis {
     public double[] findTempsLessThen(double tempValue) {
         double[] lessThen = new double[this.length];
         int j = 0;
-        for (int i=0; i<this.length; i++) {
+        for (int i = 0; i < this.length; i++) {
             if (this.tempSeries[i] < tempValue) {
                 lessThen[j] = this.tempSeries[i];
                 j++;
@@ -137,7 +149,7 @@ public class TemperatureSeriesAnalysis {
     public double[] findTempsGreaterThen(double tempValue) {
         double[] greaterThen = new double[this.length];
         int j = 0;
-        for (int i=0; i<this.length; i++) {
+        for (int i = 0; i < this.length; i++) {
             if (this.tempSeries[i] >= tempValue) {
                 greaterThen[j] = this.tempSeries[i];
                 j++;
@@ -150,29 +162,29 @@ public class TemperatureSeriesAnalysis {
         if (this.isEmpty()) {
             throw new IllegalAccessError();
         }
-        else{
+        else {
             return new TempSummaryStatistics(this);
         }
     }
 
     public int addTemps(double... temps) {
-        if (min_value(temps) < this.min_possible) {
+        if (minValue(temps) < this.minPossible) {
             throw new InputMismatchException();
         }
-        int length = 2*temps.length;
+        int len = 2*temps.length;
         int length_of_temps = temps.length;
         if (!this.isEmpty()) {
-            length = 2*this.length;
+            len = 2*this.length;
             length_of_temps = this.length + length_of_temps;
         }
         int sum = 0;
-        double[] arr  = new double[length];
+        double[] arr  = new double[len];
         for (int i=0; i<this.length; i++) {
             arr[i] = this.tempSeries[i];
             sum += this.tempSeries[i];
         }
         int j = this.length;
-        this.tempSeries = Arrays.copyOf(arr, length);
+        this.tempSeries = Arrays.copyOf(arr, len);
         this.length = length_of_temps;
         for (double value: temps) {
             this.tempSeries[j] = value;

@@ -77,7 +77,7 @@ public class TemperatureSeriesAnalysisTest {
 
     @Test
     public void testMinValueWithOneElementArray() {
-        assertEquals(-1.0, tempsOneEl.min_value(tempsOneEl.tempSeries), 0.0001);
+        assertEquals(-1.0, tempsOneEl.minValue(tempsOneEl.getTempSeries()), 0.0001);
     }
 
     @Test(expected = IllegalArgumentException.class)
@@ -168,7 +168,7 @@ public class TemperatureSeriesAnalysisTest {
     @Test
     public void testAdd() {
         tempsEl.addTemps(9.0, -5.0);
-        assertEquals(8, tempsEl.tempSeries.length);
+        assertEquals(8, tempsEl.getTempSeries().length);
     }
 
     @Test(expected = InputMismatchException.class)
