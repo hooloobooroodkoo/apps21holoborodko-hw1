@@ -121,8 +121,10 @@ public class TemperatureSeriesAnalysis {
             double closest = this.tempSeries[0];
             double difference = Math.abs(tempValue - closest);
             for (int i = 1; i < this.length; i++) {
-                if ((Math.abs(tempValue - tempSeries[i]) < difference) ||
-                        (Math.abs(tempValue - tempSeries[i]) == difference &&
+                if ((Math.abs(tempValue - tempSeries[i]) < difference)
+                        ||
+                        (Math.abs(tempValue - tempSeries[i]) == difference
+                                &&
                         tempSeries[i] > closest)) {
                     difference = Math.abs(tempValue - tempSeries[i]);
                     closest = tempSeries[i];
