@@ -119,7 +119,7 @@ public class TemperatureSeriesAnalysis {
             for (int i = 1; i < this.length; i++) {
                 if ((Math.abs(tempValue - tempSeries[i]) < difference)
                         ||
-                        (Math.abs(tempValue - tempSeries[i]) == difference
+                        (Math.abs(tempValue - tempSeries[i]) < 0.000001
                                 &&
                         tempSeries[i] > closest)) {
                     difference = Math.abs(tempValue - tempSeries[i]);
