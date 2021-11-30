@@ -4,8 +4,9 @@ package ua.edu.ucu.tempseries;
 import java.util.Arrays;
 import java.util.InputMismatchException;
 public class TemperatureSeriesAnalysis {
+    static final double MIN_POSSIBLE = -273.0;
+    static final double SPECIAL_CONST = 0.000001;
     private double[] tempSeries;
-    private static final double minPossible = -273.0;
     private int length;
 
     public TemperatureSeriesAnalysis() {
@@ -15,7 +16,7 @@ public class TemperatureSeriesAnalysis {
 
     public TemperatureSeriesAnalysis(double[] temperatureSeries) {
         if (temperatureSeries.length > 0 && minValue(temperatureSeries)
-                < this.minPossible) {
+                < this.MIN_POSSIBLE) {
             throw new InputMismatchException();
         }
         else {
@@ -99,7 +100,7 @@ public class TemperatureSeriesAnalysis {
             double minDistance = Math.abs(closest);
             for (int i = 1; i < this.length; i++) {
                 if ((Math.abs(tempSeries[i]) < minDistance)
-                        || (Math.abs(tempSeries[i]-minDistance) < 0.0000001
+                        || (Math.abs(tempSeries[i]-minDistance) < SPECIAL_CONST
                         && tempSeries[i] > closest)) {
                     minDistance = Math.abs(tempSeries[i]);
                     closest = tempSeries[i];
@@ -119,7 +120,7 @@ public class TemperatureSeriesAnalysis {
             for (int i = 1; i < this.length; i++) {
                 if ((Math.abs(tempValue - tempSeries[i]) < difference)
                         ||
-                        (Math.abs(tempValue - tempSeries[i]) < 0.000001
+                        (Math.abs(tempValue - tempSeries[i]) < SPECIAL_CONST
                                 &&
                         tempSeries[i] > closest)) {
                     difference = Math.abs(tempValue - tempSeries[i]);
@@ -167,7 +168,7 @@ public class TemperatureSeriesAnalysis {
     }
 
     public int addTemps(double... temps) {
-        if (minValue(temps) < this.minPossible) {
+        if (minValue(temps) < this.MIN_POSSIBLE) {
             throw new InputMismatchException();
         }
         int len = 2*temps.length;
