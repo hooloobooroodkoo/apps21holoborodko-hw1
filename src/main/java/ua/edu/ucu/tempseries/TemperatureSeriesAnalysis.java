@@ -5,7 +5,7 @@ import java.util.Arrays;
 import java.util.InputMismatchException;
 public class TemperatureSeriesAnalysis {
     private double[] tempSeries;
-    private final double minPossible = -273.0;
+    private static final double minPossible = -273.0;
     private int length;
 
     public TemperatureSeriesAnalysis() {
