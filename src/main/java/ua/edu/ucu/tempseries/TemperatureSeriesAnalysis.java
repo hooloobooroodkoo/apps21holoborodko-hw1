@@ -175,10 +175,10 @@ public class TemperatureSeriesAnalysis {
             throw new InputMismatchException();
         }
         int len = 2*temps.length;
-        int lengthOTemps = temps.length;
+        int lengthOfTemps = temps.length;
         if (!this.isEmpty()) {
             len = 2*this.length;
-            lengthOTemps = this.length + lengthOTemps;
+            lengthOfTemps = this.length + lengthOfTemps;
         }
         int sum = 0;
         double[] arr  = new double[len];
@@ -188,7 +188,7 @@ public class TemperatureSeriesAnalysis {
         }
         int j = this.length;
         this.tempSeries = Arrays.copyOf(arr, len);
-        this.length = lengthOTemps;
+        this.length = lengthOfTemps;
         for (double value: temps) {
             this.tempSeries[j] = value;
             sum += value;

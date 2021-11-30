@@ -171,8 +171,14 @@ public class TemperatureSeriesAnalysisTest {
         assertEquals(8, tempsEl.getTempSeries().length);
     }
 
+    @Test
+    public void testAddToEmpty() {
+        tempsZeroEl.addTemps(9.0, -5.0);
+        assertEquals(4, tempsZeroEl.getTempSeries().length);
+    }
+
     @Test(expected = InputMismatchException.class)
-    public void testAddToSmall() {
+    public void testAddTooSmall() {
         tempsEl.addTemps(-280.0);
     }
 }
